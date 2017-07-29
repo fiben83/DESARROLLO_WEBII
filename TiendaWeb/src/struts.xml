@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+<constant name="struts.devMode" value="true" />
+
+<package name="com.actions" namespace="/" extends="struts-default">
+	  
+        <default-action-ref name="Editar_User" />
+        
+        <action name="Search_User" class="com.actions.UserAction" method="search">
+        	<result name="input" type="redirectAction">Show_User</result>
+        	<result name="success">/WEB-INF/admin/listUser.jsp</result>
+        	<result name="error">/WEB-INF/admin/Error.jsp</result>
+        	 			
+        </action>
+        <action name="Show_User" class="com.actions.UserAction">
+        	<result name="success">/WEB-INF/admin/userSearch.jsp</result>
+        	 			
+        </action>
+        <action name="Login_User" class="com.actions.UserAction" method="login">
+        	<result name="input" type="redirectAction">Editar_User</result>
+        	<result name="success">/WEB-INF/admin/adminSettings.jsp</result>
+        	<result name="error">/WEB-INF/admin/Error.jsp</result>
+        	 			
+        </action>
+       <action name="Show_Settings" class="com.actions.UserAction" method="settings">
+        	<result name="success">/WEB-INF/admin/adminSettings.jsp</result>
+        	 			
+        </action>
+        <action name="Editar_User" class="com.actions.UserAction" method="editar">
+			<!-- <interceptor-ref name="paramsPrepareParamsStack"/>-->
+            <result name="success">/WEB-INF/admin/adminLogin.jsp</result>
+        </action>
+        <action name="List_Record" class="com.actions.RecordAction" method="list">
+            <result>/WEB-INF/admin/operaciones.jsp</result>
+        </action>
+        <action name="ShowForm_User" class="com.actions.UserAction" method="show">
+            <result name="success">/WEB-INF/admin/adminUserForm.jsp</result>
+        </action>
+        <action name="Add_User" class="com.actions.UserAction" method="create">
+        	<result name="input">/WEB-INF/admin/adminUserForm.jsp</result>
+            <result name="success">/WEB-INF/admin/adminUserForm.jsp</result>
+        </action>
+        <action name="ShowForm_Record" class="com.actions.RecordAction" method="show">
+            <result name="success">/WEB-INF/admin/adminRecordForm.jsp</result>
+        </action>
+        <action name="Add_Record" class="com.actions.RecordAction" method="add">
+        	<result name="input">/WEB-INF/admin/adminRecordForm.jsp</result>
+            <result name="success" type="redirectAction">List_Record</result>
+        </action>
+        
+        <action name="Editar_Record" class="com.actions.RecordAction" method="editar">
+			<interceptor-ref name="paramsPrepareParamsStack"/>
+            <result name="success">/WEB-INF/admin/editRecordForm.jsp</result>
+        </action>
+        
+        <action name="Update_Record" class="com.actions.RecordAction" method="update">
+        	<result name="input">/WEB-INF/admin/editRecordForm.jsp</result>
+            <result name="success" type="redirectAction">List_Record</result>
+        </action>
+        
+        <action name="Delete_Record" class="com.actions.RecordAction" method="delete">
+            <result name="success" type="redirectAction">List_Record</result>
+        </action>
+ 
+</package>
+</struts>
